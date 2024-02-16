@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/*label.mdc-label {*/
+/*    color: black;*/
+/*}*/
+
+/*.mdc-checkbox .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not([data-indeterminate=true])~.mdc-checkbox__background {*/
+/*    border-color: black;*/
+/*}*/
+
+/*.mdc-checkbox__background {*/
+/*    border-color: black;*/
+/*}*/
