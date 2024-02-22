@@ -216,6 +216,13 @@ export class AppComponent implements OnInit {
     });
   }
 
+  getFilterStatus() {
+    const values = Object.values(this.selectsGroup.value);
+    return values.find((el) => el === true)
+      ? this.dataSlice.length
+      : this.originalData.length;
+  }
+
   fileChange(event: any) {
     let fileList: FileList = event.target.files;
     if (fileList.length < 1) {

@@ -40,7 +40,7 @@
       </mat-card>
     </ng-container>
 
-    <mat-paginator [length]="originalData.length"
+    <mat-paginator [length]="getFilterStatus()"
                    [pageSize]="pageSize"
                    (page)="changePage($event)"
                    aria-label="Select page">
