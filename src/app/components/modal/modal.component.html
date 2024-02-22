@@ -1,0 +1,14 @@
+<div class="modal-wrapper">
+    <form [formGroup]="formModal" class="form">
+        <mat-form-field>
+            <span>Word name:</span><input matInput type="text" formControlName="word">
+        </mat-form-field>
+        <mat-form-field>
+            <span>Stem:</span><input matInput type="text" formControlName="stem">
+        </mat-form-field>
+        <mat-form-field>
+            <span>Part of speech:</span><input matInput type="text" formControlName="part_of_speech">
+        </mat-form-field>
+    </form>
+    <button mat-raised-button (click)="onUpdate()" color="primary">Редактировать</button>
+</div>

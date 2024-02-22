@@ -32,6 +32,10 @@
               </mat-card-subtitle>
             </ng-container>
           </mat-card-subtitle>
+          <mat-card-subtitle [ngStyle]="{color: '#6f7d89'}">
+            <button (click)="onDelete(el.id)">Delete</button>
+            <button (click)="openReductModal(el)">Update</button>
+          </mat-card-subtitle>
         </mat-card-header>
       </mat-card>
     </ng-container>

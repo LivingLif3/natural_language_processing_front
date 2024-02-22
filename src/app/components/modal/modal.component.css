@@ -1,0 +1,9 @@
+.modal-wrapper {
+    padding: 20px;
+    min-width: 300px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
