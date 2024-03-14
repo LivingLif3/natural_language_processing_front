@@ -41,8 +41,8 @@
       <p><mat-checkbox formControlName="ADV" matTooltip="Show ADVERB words">ADV</mat-checkbox></p>
     </div> -->
     <ng-container *ngFor="let sentanse of renderedDataSlice$ | async">
-      <div>Предложение: {{getSentanse(sentanse)}}</div>
-      <ng-container *ngFor="let el of sentanse">
+      <div>Предложение: {{sentanse.sentence}}</div>
+      <ng-container *ngFor="let el of sentanse.words">
         <mat-card class="card">
           <mat-card-header>
             <mat-card-title>word: {{el['word']}}</mat-card-title>

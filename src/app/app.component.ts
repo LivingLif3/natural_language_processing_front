@@ -165,73 +165,79 @@ export class AppComponent implements OnInit, AfterViewInit {
     //   part_of_speech: 'NOUN',
     //   endings: [],
     // },
-    [
-      {
-        word: 'so',
-        info: {
-          stem: 'so',
-          part_of_speech: 'PROPN',
+    {
+      sentence: 'so he go to school',
+      words: [
+        {
+          word: 'so',
+          info: {
+            stem: 'so',
+            part_of_speech: 'PROPN',
+          },
         },
-      },
-      {
-        word: 'he',
-        info: {
-          stem: 'he',
-          part_of_speech: 'NOUN',
+        {
+          word: 'he',
+          info: {
+            stem: 'he',
+            part_of_speech: 'NOUN',
+          },
         },
-      },
-      {
-        word: 'go',
-        info: {
-          stem: 'go',
-          part_of_speech: 'VERB',
+        {
+          word: 'go',
+          info: {
+            stem: 'go',
+            part_of_speech: 'VERB',
+          },
         },
-      },
-      {
-        word: 'to',
-        info: {
-          stem: 'so',
-          part_of_speech: 'PROPN',
+        {
+          word: 'to',
+          info: {
+            stem: 'so',
+            part_of_speech: 'PROPN',
+          },
         },
-      },
-      {
-        word: 'school',
-        info: {
-          stem: 'school',
-          part_of_speech: 'NOUN',
+        {
+          word: 'school',
+          info: {
+            stem: 'school',
+            part_of_speech: 'NOUN',
+          },
         },
-      },
-    ],
-    [
-      {
-        word: 'so',
-        info: {
-          stem: 'so',
-          part_of_speech: 'PROPN',
+      ],
+    },
+    {
+      sentence: 'so he to school',
+      words: [
+        {
+          word: 'so',
+          info: {
+            stem: 'so',
+            part_of_speech: 'PROPN',
+          },
         },
-      },
-      {
-        word: 'he',
-        info: {
-          stem: 'he',
-          part_of_speech: 'NOUN',
+        {
+          word: 'he',
+          info: {
+            stem: 'he',
+            part_of_speech: 'NOUN',
+          },
         },
-      },
-      {
-        word: 'to',
-        info: {
-          stem: 'so',
-          part_of_speech: 'PROPN',
+        {
+          word: 'to',
+          info: {
+            stem: 'so',
+            part_of_speech: 'PROPN',
+          },
         },
-      },
-      {
-        word: 'school',
-        info: {
-          stem: 'school',
-          part_of_speech: 'NOUN',
+        {
+          word: 'school',
+          info: {
+            stem: 'school',
+            part_of_speech: 'NOUN',
+          },
         },
-      },
-    ],
+      ],
+    },
   ];
   dataSlice: any = [];
   pageIndex: number = 0;
@@ -478,7 +484,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   searchPattern(data: any) {
     const searchingPattern = this.formSearchPattern(this.partsOfSpeech);
-    console.log(searchingPattern);
     let findedPatterns = [];
     let valueIndex = -1;
     for (let [index, pattern] of searchingPattern.entries()) {
@@ -487,30 +492,31 @@ export class AppComponent implements OnInit, AfterViewInit {
         break;
       }
     }
-    console.log(searchingPattern, valueIndex);
     if (valueIndex !== -1) {
       for (let sentense of data) {
         let sentancePattern = [];
-        for (let [wordIndex, word] of sentense.entries()) {
+        for (let [wordIndex, word] of sentense.words.entries()) {
           if (word.word === searchingPattern[valueIndex].value) {
-            let findedPattern = sentense.slice(
+            let findedPattern = sentense.words.slice(
               wordIndex - valueIndex,
               wordIndex + (searchingPattern.length - valueIndex)
             );
-            console.log(findedPattern);
             if (this.comparePatterns(searchingPattern, findedPattern)) {
               sentancePattern.push(...findedPattern);
             }
           }
         }
-        findedPatterns.push(sentancePattern);
+        findedPatterns.push({
+          sentence: sentense.sentence,
+          words: sentancePattern,
+        });
       }
     } else {
       for (let sentense of data) {
         let sentancePattern = [];
-        for (let [wordIndex, word] of sentense.entries()) {
+        for (let [wordIndex, word] of sentense.words.entries()) {
           if (word.info.part_of_speech === searchingPattern[0].pattern) {
-            let findedPattern = sentense.slice(
+            let findedPattern = sentense.words.slice(
               wordIndex,
               wordIndex + searchingPattern.length
             );
@@ -519,7 +525,10 @@ export class AppComponent implements OnInit, AfterViewInit {
             }
           }
         }
-        findedPatterns.push(sentancePattern);
+        findedPatterns.push({
+          sentence: sentense.sentence,
+          words: sentancePattern,
+        });
       }
     }
     return findedPatterns;
