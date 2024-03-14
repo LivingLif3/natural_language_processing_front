@@ -11,12 +11,20 @@ export class ApiService {
     return this.http.post('http://localhost:5000/vocabulary/post', formData);
   }
 
+  sendCorpus(formData: FormData) {
+    return this.http.post('http://localhost:5000/corpus/post', formData);
+  }
+
   deleteWord(id: number) {
     return this.http.delete(`http://localhost:5000/vocabulary/delete/${id}`);
   }
 
   getAllWords() {
     return this.http.get('http://localhost:5000/vocabulary/getAll');
+  }
+
+  getAllSentences() {
+    return this.http.get('http://localhost:5000/corpus/get');
   }
 
   updateWord(id: number, data: any) {

@@ -5,39 +5,64 @@
   </div>
   <div class="data-wrapper">
     <form [formGroup]="findInput">
-      <mat-form-field>
+      <!-- <mat-form-field>
         <input matInput type="text" formControlName="search">
+      </mat-form-field> -->
+      <mat-form-field class="example-chip-list">
+        <mat-label>Favorite Fruits</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Fruit selection">
+          <ng-container *ngFor="let partOfSpeech of partsOfSpeech">
+            <mat-chip-row (removed)="remove(partOfSpeech)">
+              {{partOfSpeech}}
+              <button matChipRemove [attr.aria-label]="'remove ' + partOfSpeech">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+          </ng-container>
+        </mat-chip-grid>
+        <input placeholder="New Fruit..." #fruitInput formControlName="patternSearching"
+          [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="add($event)"/>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <ng-container *ngFor="let partOfSpeech of allPartsOfSpeech">
+            <mat-option [value]="partOfSpeech">{{partOfSpeech}}</mat-option>
+          </ng-container>
+        </mat-autocomplete>
       </mat-form-field>
     </form>
-    
-    <div class="example-section" [formGroup]="selectsGroup">
+
+    <!-- <div class="example-section" [formGroup]="selectsGroup">
       <h4>Select your toppings:</h4>
       <p><mat-checkbox formControlName="NOUN" matTooltip="Show NOUN words">NOUN</mat-checkbox></p>
       <p><mat-checkbox formControlName="PROPN" matTooltip="Show PROPER NOUN words">PROPN</mat-checkbox></p>
       <p><mat-checkbox formControlName="VERB" matTooltip="Show VERB words">VERB</mat-checkbox></p>
       <p><mat-checkbox formControlName="ADJ" matTooltip="Show ADJECTIVE words">ADJ</mat-checkbox></p>
       <p><mat-checkbox formControlName="ADV" matTooltip="Show ADVERB words">ADV</mat-checkbox></p>
-    </div>
-    <ng-container *ngFor="let el of dataSlice">
-      <mat-card class="card">
-        <mat-card-header>
-          <mat-card-title>word: {{el['word']}}</mat-card-title>
-          <mat-card-subtitle [ngStyle]="{color: '#6f7d89'}">stem: {{el['stem']}}</mat-card-subtitle>
-          <mat-card-subtitle [ngStyle]="{color: '#6f7d89'}">part of speech: {{el['part_of_speech']}}</mat-card-subtitle>
-          <mat-card-subtitle [ngStyle]="{color: '#6f7d89'}">
-            endings:
-            <ng-container *ngFor="let ending of el['endings']">
-              <mat-card-subtitle class="ending" [ngStyle]="{color: '#6f7d89'}">
-                {{ending['name']}}: {{ending['info']}}
-              </mat-card-subtitle>
-            </ng-container>
-          </mat-card-subtitle>
-          <mat-card-subtitle [ngStyle]="{color: '#6f7d89'}">
-            <button (click)="onDelete(el.id)">Delete</button>
-            <button (click)="openReductModal(el)">Update</button>
-          </mat-card-subtitle>
-        </mat-card-header>
-      </mat-card>
+    </div> -->
+    <ng-container *ngFor="let sentanse of renderedDataSlice$ | async">
+      <div>Предложение: {{getSentanse(sentanse)}}</div>
+      <ng-container *ngFor="let el of sentanse">
+        <mat-card class="card">
+          <mat-card-header>
+            <mat-card-title>word: {{el['word']}}</mat-card-title>
+            <!-- <mat-card-subtitle [ngStyle]="{color: '#6f7d89'}">stem: {{el['stem']}}</mat-card-subtitle> -->
+            <mat-card-subtitle [ngStyle]="{color: '#6f7d89'}">part of speech: {{el['info']['part_of_speech']}}</mat-card-subtitle>
+            <!-- <mat-card-subtitle [ngStyle]="{color: '#6f7d89'}">
+              endings:
+              <ng-container *ngFor="let ending of el['endings']">
+                <mat-card-subtitle class="ending" [ngStyle]="{color: '#6f7d89'}">
+                  {{ending['name']}}: {{ending['info']}}
+                </mat-card-subtitle>
+              </ng-container>
+            </mat-card-subtitle>
+            <mat-card-subtitle [ngStyle]="{color: '#6f7d89'}">
+              <button (click)="onDelete(el.id)">Delete</button>
+              <button (click)="openReductModal(el)">Update</button>
+            </mat-card-subtitle> -->
+          </mat-card-header>
+        </mat-card>
+      </ng-container>
     </ng-container>
 
     <mat-paginator [length]="getFilterStatus()"
