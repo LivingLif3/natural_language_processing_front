@@ -171,6 +171,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         {
           word: 'so',
           info: {
+            concordances: ['catch the culprit'],
             stem: 'so',
             part_of_speech: 'PROPN',
           },

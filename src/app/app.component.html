@@ -48,15 +48,15 @@
             <mat-card-title>word: {{el['word']}}</mat-card-title>
             <!-- <mat-card-subtitle [ngStyle]="{color: '#6f7d89'}">stem: {{el['stem']}}</mat-card-subtitle> -->
             <mat-card-subtitle [ngStyle]="{color: '#6f7d89'}">part of speech: {{el['info']['part_of_speech']}}</mat-card-subtitle>
-            <!-- <mat-card-subtitle [ngStyle]="{color: '#6f7d89'}">
-              endings:
-              <ng-container *ngFor="let ending of el['endings']">
+            <mat-card-subtitle [ngStyle]="{color: '#6f7d89'}">
+              concordances:
+              <ng-container *ngFor="let concordance of el['info']['concordances']; let i = index">
                 <mat-card-subtitle class="ending" [ngStyle]="{color: '#6f7d89'}">
-                  {{ending['name']}}: {{ending['info']}}
+                  {{i + 1}}: {{concordance}}
                 </mat-card-subtitle>
               </ng-container>
             </mat-card-subtitle>
-            <mat-card-subtitle [ngStyle]="{color: '#6f7d89'}">
+            <!-- <mat-card-subtitle [ngStyle]="{color: '#6f7d89'}">
               <button (click)="onDelete(el.id)">Delete</button>
               <button (click)="openReductModal(el)">Update</button>
             </mat-card-subtitle> -->
